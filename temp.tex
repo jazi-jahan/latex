@@ -1,0 +1,57 @@
+\documentclass[10pt, letterpaper]{article}
+
+% Packages
+\usepackage[utf8]{inputenc}
+\usepackage{geometry}
+\geometry{margin=1in}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{hyperref}
+
+% Title and Author
+\title{\textbf{Demo LaTeX Document}}
+\author{Your Name}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+This is a simple LaTeX document demonstrating text formatting, images, and hyperlinks.
+
+\section{Text Formatting}
+\textbf{Bold text}, \textit{italic text}, and \underline{underlined text} are supported.
+
+\section{Lists}
+\subsection{Bullet Points}
+\begin{itemize}
+    \item First item
+    \item Second item
+    \item Third item
+\end{itemize}
+
+\subsection{Numbered List}
+\begin{enumerate}
+    \item First item
+    \item Second item
+    \item Third item
+\end{enumerate}
+
+\section{Mathematics}
+Here is an inline equation: \( E = mc^2 \).  
+And a block equation:
+\[
+\int_a^b x^2 dx = \frac{b^3}{3} - \frac{a^3}{3}
+\]
+
+\section{Adding an Image}
+\begin{center}
+    \includegraphics[width=0.5\textwidth]{example-image} % Replace with your image
+    \captionof{figure}{Example Image}
+\end{center}
+
+\section{Hyperlinks}
+Click here to visit \href{https://www.latex-project.org/}{LaTeX Project Website}.
+
+\end{document}
