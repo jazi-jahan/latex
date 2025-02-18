@@ -1,0 +1,347 @@
+% Define the document class
+\documentclass[10pt, a4paper]{article}
+
+% Embedding the class definition directly into the .tex file
+\RequirePackage[margin=2cm]{geometry}
+\usepackage{microtype}
+\usepackage[
+    pdftitle={Candidate Name's Resume},
+    pdfauthor={Add candidate name here},
+    pdfcreator={LaTeX},
+    colorlinks=true,
+    urlcolor=primaryColor
+]{hyperref}
+\RequirePackage{xcolor}
+
+\definecolor{VividPurple}{HTML}{2E64FE}
+\definecolor{SlateGrey}{HTML}{2E2E2E}
+\definecolor{LightGrey}{HTML}{555555}
+\definecolor{AzureRadiance}{HTML}{00ABFF}
+\definecolor{DodgerBlue}{HTML}{4F83FF}
+\definecolor{ElectricViolet}{HTML}{9F00FF}
+\definecolor{Black}{HTML}{000000}
+\definecolor{primaryColor}{HTML}{000000}
+
+\colorlet{accent}{Black}
+\colorlet{body}{Black!80}
+
+\RequirePackage{fontawesome5}
+\newenvironment{header}{
+    \setlength{\topsep}{0pt}\par\kern\topsep\centering\linespread{1.5}
+}{
+    \par\kern\topsep
+} % new environment for the header
+
+\newcommand{\AND}{\unskip
+    \cleaders\copy\ANDbox\hskip\wd\ANDbox
+    \ignorespaces
+}
+\newsavebox\ANDbox
+\sbox\ANDbox{}
+% save the original href command in a new command:
+\let\hrefWithoutArrow\href
+
+% new command for external links:
+\renewcommand{\href}[2]{\hrefWithoutArrow{#1}{\ifthenelse{\equal{#2}{}}{ }{#2 }\raisebox{.15ex}{\footnotesize \faExternalLink*}}}
+
+\RequirePackage{dashrule}
+
+\setlength{\parindent}{0pt}
+\newcommand{\divider}{\medskip\textcolor{accent}{\hdashrule{\linewidth}{0.8pt}{0.5ex}}\bigskip}
+\setlength{\parindent}{0pt}
+\newcommand{\dividergray}{\textcolor{body!50}{\hdashrule{\linewidth}{0.4pt}{0.5ex}}\smallskip}
+
+\newcommand{\cvsection}[1]{%
+  \bigskip%
+  {\color{accent}\small\bfseries\textls[250]{\MakeUppercase{#1}}}\\[-1ex]%
+  {\color{accent}\rule{\linewidth}{1.2pt}\par}\medskip
+}
+
+\newcommand{\itemmarker}{\color{accent}\small\textbullet}
+\newcommand{\dashedbullets}{\color{accent}\small\textendash}
+\RequirePackage{enumitem}
+\setlist{leftmargin=*,labelsep=0.8em,nosep,itemsep=0.15\baselineskip,after=\vskip0.15\baselineskip,before=\vskip0.15\baselineskip}
+\setlist[itemize]{label=\itemmarker}
+
+\newcommand{\company}[4]{%
+\smallskip
+    {\small\color{body}\textls[140]{\textbf{\MakeUppercase{#1}}}}       \hfill
+    {\small\color{body}\textls[140]{\textbf{\MakeUppercase{#2}}}}       \par
+    \smallskip
+    { \color{accent} \faMapMarker*} \hspace{0.5em}{\color{body}{#3}}   \hfill
+    { \color{accent} \faCalendar*[regular]}  \hspace{0.5em}{\color{body}{#4}}   \par
+    \smallskip
+}
+
+\RequirePackage{tikz}
+\newcommand{\cvtag}[1]{%
+  \tikz[baseline]\node[anchor=base,draw=accent,rounded corners,inner xsep=1ex,inner ysep =0.75ex,text height=1.2ex,text depth=.2ex,fill=accent]{\bfseries\scriptsize\textcolor{white}{#1}};
+}
+
+\NewDocumentCommand{\splitoncomma}{ >{\SplitList{,}} m }{%
+  \ProcessList{#1}{\func}%
+}
+
+\NewDocumentCommand{\func}{m}{%
+  \cvtag{#1} % a space follows
+}
+
+
+\newcommand{\education}[4]{%
+\smallskip
+    {\textbf{\small\color{body}\textls[140]{{\MakeUppercase{#1}}}}}  \\
+    {\small\textls[100]{{{#2}}}}
+    \hfill{ \color{accent} \faCalendar*[regular]}  \hspace{0.5em}{{#4}}   \par
+}
+
+\RequirePackage{multirow,tabularx}
+\newcommand{\cvachievement}[3]{%
+  \begin{tabularx}{\linewidth}{@{}p{2em} @{\hspace{1ex}} >{\raggedright\arraybackslash}X@{}}
+  \multirow{2}{*}{\Large\color{accent}#1} & {#2}\\
+  & #3
+  \end{tabularx}%
+  \smallskip
+}
+
+\pdfinfo{ /Author (Candidate Name) /Title (Resume) /Keywords (Add some keywords here;) /Subject (by Candidate Name) /Creator(Candidate Name)}
+
+
+\AtBeginDocument{%
+  \pagestyle{empty}
+  \color{body}
+  \raggedright
+}
+
+% Your document content starts here
+\geometry{left=1.2cm,right=1.2cm,marginparwidth=6.8cm,marginparsep=1.2cm,top=1.2cm,bottom=1.2cm}
+\usepackage[default]{lato}
+\begin{document}
+
+%%% HEADER WHEN PHOTO DIDN'T NEED TO ADD. ONLY USE ONE HEADER AT A TIME%%%
+\begin{header} 
+    \begin{minipage}[t]{0.2\textwidth}
+        \center
+        \vfill
+        % Add your image here
+        \includegraphics[width=\linewidth]{user.jpeg}
+        \vfill
+    \end{minipage}
+    \hfill
+    \begin{minipage}[t]{0.7\textwidth}
+        \center
+        \vfill\null
+        {\Large\bfseries\color{black}\textls[250]{\MakeUppercase{ Candidate Name}}\par}
+        \vspace{10pt}
+        {\normalsize\bfseries\color{accent}\textls[340]{\MakeUppercase{Profession Name eg: Software developer}}\par}
+        \vspace{10pt}
+        
+        % below there have two mbox. one for female and another for male. remove the unwanted one. i mean if it is a male resume then keep only male /mbox and /hspace next to that. and remove the female mbox hspace. 
+        \mbox{{\color{black}\footnotesize\faMale}\hspace*{0.13cm}Male}%
+        % \hspace{10pt}
+        \kern 0.25 cm%
+        \AND%
+        \kern 0.25 cm%
+        \vspace{5pt}
+        \mbox{{\color{black}\footnotesize\faFemale}\hspace*{0.13cm}Female}%
+        % \hspace{10pt}
+        \kern 0.25 cm%
+        \AND%
+        \kern 0.25 cm%
+        \mbox{{\color{black}\footnotesize\faCalendar[Regular]}\hspace*{0.13cm}age with outro text "Years Old" eg: 25 years old}%
+        % \hspace{10pt}
+        \kern 0.25 cm%
+        \AND%
+        \kern 0.25 cm%
+        \mbox{{\color{black}\footnotesize\faMapMarker*}\hspace*{0.13cm}Current Location}%
+        % \hspace{10pt}
+        \kern 0.25 cm%
+        \AND%
+        \kern 0.25 cm%
+        \mbox{\hrefWithoutArrow{https://yourwebsite.com/}{{\footnotesize\faLink}\hspace*{0.13cm}yourwebsite}}%
+        \smallskip
+        % \hspace{10pt}
+        \kern 0.25 cm%
+        \AND%
+        \kern 0.25 cm%
+        \mbox{\hrefWithoutArrow{https://linkedin.com/in/yourusername}{\color{black}{\footnotesize\faLinkedinIn}\hspace*{0.13cm}yourusername}}
+        \vfill\null
+        \kern 0.25 cm
+        % if any other social profile available then add that also in following format.
+            % \AND
+            % \kern 0.25 cm
+            % \mbox{\hrefWithoutArrow{social profile link}{\color{black}{\footnotesize\faLinkedinIn}\hspace*{0.13cm}social profile username (can be filter from link}}
+            %icon name for each social media:
+            % facebook: \faFacebookF. instagram:\faInstagram, twitter:\faTwitter, github:\faGithub, behance:\faBehance, linkedin:\faLinkedin, portfolio and other:\faLink
+            % also filter out th username from the link
+    \end{minipage}
+\end{header}
+
+%%% HEADER WHEN PHOTO NEED TO ADD. ONLY USE ONE HEADER AT A TIME%%%
+\begin{header} 
+        \center
+        \vfill\null
+        {\Large\bfseries\color{black}\textls[250]{\MakeUppercase{ Candidate Name}}\par}
+        \vspace{10pt}
+        {\normalsize\bfseries\color{accent}\textls[340]{\MakeUppercase{Profession Name eg: Software developer}}\par}
+        \vspace{10pt}
+        
+        % below there have two mbox. one for female and another for male. remove the unwanted one. i mean if it is a male resume then keep only male /mbox and /hspace next to that. and remove the female mbox hspace. 
+        \mbox{{\color{black}\footnotesize\faMale}\hspace*{0.13cm}Male}%
+        % \hspace{10pt}
+        \kern 0.25 cm%
+        \AND%
+        \kern 0.25 cm%
+        \vspace{5pt}
+        \mbox{{\color{black}\footnotesize\faFemale}\hspace*{0.13cm}Female}%
+        % \hspace{10pt}
+        \kern 0.25 cm%
+        \AND%
+        \kern 0.25 cm%
+        \mbox{{\color{black}\footnotesize\faCalendar[Regular]}\hspace*{0.13cm}age with outro text "Years Old" eg: 25 years old}%
+        % \hspace{10pt}
+        \kern 0.25 cm%
+        \AND%
+        \kern 0.25 cm%
+        \mbox{{\color{black}\footnotesize\faMapMarker*}\hspace*{0.13cm}Current Location}%
+        % \hspace{10pt}
+        \kern 0.25 cm%
+        \AND%
+        \kern 0.25 cm%
+        \mbox{\hrefWithoutArrow{https://yourwebsite.com/}{{\footnotesize\faLink}\hspace*{0.13cm}yourwebsite}}%
+        \smallskip
+        % \hspace{10pt}
+        \kern 0.25 cm%
+        \AND%
+        \kern 0.25 cm%
+        \mbox{\hrefWithoutArrow{https://linkedin.com/in/yourusername}{\color{black}{\footnotesize\faLinkedinIn}\hspace*{0.13cm}yourusername}}
+        \vfill\null
+        \kern 0.25 cm
+        % if any other social profile available then add that also in following format.
+            % \AND
+            % \kern 0.25 cm
+            % \mbox{\hrefWithoutArrow{social profile link}{\color{black}{\footnotesize\faLinkedinIn}\hspace*{0.13cm}social profile username (can be filter from link}}
+            %icon name for each social media:
+            % facebook: \faFacebookF. instagram:\faInstagram, twitter:\faTwitter, github:\faGithub, behance:\faBehance, linkedin:\faLinkedin, portfolio and other:\faLink
+            % also filter out th username from the link
+            
+\end{header}
+
+\smallskip
+
+
+\cvsection{Summary}
+    Add profile summary here
+
+\medskip
+
+
+\cvsection{Experience}
+
+    \company
+        {Position Name}
+        {Company Name}
+        {Location}
+        {period. eg:May 2019 -- Apr 2023}
+
+    \begin{itemize}
+        \item add experience description here as bullet point\smallskip
+        \item add experience description here as bullet point\smallskip
+    \end{itemize}
+
+\smallskip
+%if multiple experience add the following divider and smallskip in between each experience.
+% \divider
+% \smallskip
+
+\cvsection{Education}
+\medskip
+    \education
+        {Education Name}
+        {College/Institute Name, College/Institute Location}
+        {}
+        {Education Period}
+        \vspace{5pt}
+        \begin{itemize}
+            \item add education description here as bullet point\smallskip
+            \item add education description here as bullet point\smallskip
+        \end{itemize}
+        \par
+        \dividergray
+
+    \education
+        {Education Name}
+        {College/Institute Name, College/Institute Location}
+        {}
+        {Education Period}
+        \vspace{5pt}
+        \begin{itemize}
+            \item add education description here as bullet point\smallskip
+            \item add education description here as bullet point\smallskip
+        \end{itemize}
+        \par
+        %if need to add more add \dividergray inbetween the each education
+\cvsection{Skills}
+    {\textbf{\small\color{body}\textls[140]{{Skill Name}}}\textsc{: Skill Description}} \par\smallskip
+    {\textbf{\small\color{body}\textls[140]{{Skill Name}}}\textsc{: Skill Description}}
+    \par\smallskip
+
+\cvsection{Projects}
+    \bigskip
+    \textbf{PROJECT NAME} \hfill \textit{Project role}  \par\smallskip 
+    \begin{itemize}
+        \item add project description and result here as bullet point\smallskip
+        \item add project description and result here as bullet point\smallskip
+    \end{itemize}
+    % if multiple then use smallskip then dividergrey and again smallskip as following
+    % \smallskip
+    % \dividergray
+    % \smallskip
+
+\cvsection{Awards}
+    \bigskip
+
+    \cvachievement{\faTrophy}{ {\bfseries Award Name, Award issued organisation name} \hfill { \color{accent} \faCalendar*[regular]}  \hspace{0.5em}{Award year}\smallskip}
+    {Award description as paragraph}\par
+
+    \smallskip
+    \dividergray
+    \smallskip
+
+    \cvachievement{\faTrophy}{ {\bfseries Award Name, Award issued organisation name} \hfill { \color{accent} \faCalendar*[regular]}  \hspace{0.5em}{Award year}\smallskip}
+    {Award description as paragraph}\par
+
+\medskip
+
+\cvsection{Certification}
+    \bigskip
+
+    \cvachievement{\faAward}{ {\bfseries Certification Name, Certification issued organisation name} \hfill { \color{accent} \faCalendar*[regular]}  \hspace{0.5em}{Certification year}\smallskip}
+    {Award description as paragraph}\par
+
+    \smallskip
+    \dividergray
+    \smallskip
+
+    \cvachievement{\faAward}{ {\bfseries Certification Name, Certification issued organisation name} \hfill { \color{accent} \faCalendar*[regular]}  \hspace{0.5em}{Certification year}\smallskip}
+    {Award description as paragraph}\par
+
+
+\cvsection{Languages}
+    {\textbf{\small\color{body}\textls[140]{{Language Name}}}\textsc{: Language Proficiency Level} \par\smallskip
+    {\textbf{\small\color{body}\textls[140]{{Skill Name}}}\textsc{: Language Proficiency Level} \par\smallskip
+
+\cvsection{References}
+    {\textbf{\small\color{body}\textls[140]{{\MakeUppercase{Referencer Name}}}}}
+    \hfill{ \color{accent} \faPhone*}  \hspace{0.5em}{{referencer number}}\\
+    \vspace{5pt}
+    {\small\textls[140]{{{Referencer Position, Referencer Company}}}}
+    \hfill{ \color{accent} \faEnvelope[regular]}  \hspace{0.5em}{{referencer email id}} \\  \vspace{5pt}
+    \textit{referencer message in ""}
+    %if references available upon request then only the following 
+    %\textit{available upon request}
+%if multiple references add the following divider and smallskip in between each experience.
+% \divider
+% \smallskip
+
+\medskip
+\end{document}
