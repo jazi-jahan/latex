@@ -1,3 +1,433 @@
-\documentclass{article}
-\begin{document} Hello World LaTeX-On-HTTP 
-\end{document}
+\documentclass[10pt, letterpaper]{article}
+
+    % Packages:
+    \usepackage[
+        ignoreheadfoot,
+        top=2 cm,
+        bottom=2 cm,
+        left=2 cm,
+        right=2 cm,
+        footskip=1.0 cm,
+    ]{geometry}
+    \usepackage{titlesec}
+    \usepackage{tabularx}
+    \usepackage{array}
+    \usepackage[dvipsnames]{xcolor}
+    \definecolor{primaryColor}{rgb}{0, 0, 0}
+    \usepackage{enumitem}
+    \usepackage{fontawesome5}
+    \usepackage{amsmath}
+    \usepackage[
+        pdftitle={Aarav's Resume},
+        pdfauthor={Aarav Mehta},
+        pdfcreator={LaTeX},
+        colorlinks=true,
+        urlcolor=primaryColor
+    ]{hyperref}
+    \usepackage[pscoord]{eso-pic}
+    \usepackage{calc}
+    \usepackage{bookmark}
+    \usepackage{lastpage}
+    \usepackage{changepage}
+    \usepackage{paracol}
+    \usepackage{ifthen}
+    \usepackage{needspace}
+    \usepackage{iftex}
+    \usepackage{graphicx}
+
+    \ifPDFTeX
+        \input{glyphtounicode}
+        \pdfgentounicode=1
+        % \usepackage[T1]{fontenc}
+        \usepackage[utf8]{inputenc}
+        \usepackage{lmodern}
+    \fi
+
+    \AtBeginEnvironment{adjustwidth}{\partopsep0pt} 
+    \pagestyle{empty}
+    \setcounter{secnumdepth}{0}
+    \setlength{\parindent}{0pt}
+    \setlength{\topskip}{0pt}
+    \setlength{\columnsep}{0cm}
+    \makeatletter
+    \let\ps@customFooterStyle\ps@plain
+    \patchcmd{\ps@customFooterStyle}{\thepage}{
+        \color{gray}\textit{\small Candidate Name - Page \thepage{} of \pageref*{LastPage}}
+    }{}{} 
+    \makeatother
+    \pagestyle{customFooterStyle}
+
+    \titleformat{\section}{\needspace{4\baselineskip}\bfseries\large}{}{0pt}{}[\vspace{1pt}\titlerule]
+
+    \titlespacing{\section}{
+        -1pt
+    }{
+        0.3 cm
+    }{
+        0.2 cm
+    }
+
+    \renewcommand\labelitemi{$\circ$}
+    \newenvironment{highlights}{
+        \begin{itemize}[
+            topsep=0.10 cm,
+            parsep=0.10 cm,
+            partopsep=0pt,
+            itemsep=0pt,
+            leftmargin=0.4 cm + 10pt
+        ]
+    }{
+        \end{itemize}
+    }
+
+    \newenvironment{highlightsforbulletentries}{
+        \begin{itemize}[
+            topsep=0.10 cm,
+            parsep=0.10 cm,
+            partopsep=0pt,
+            itemsep=0pt,
+            leftmargin=10pt
+        ]
+    }{
+        \end{itemize}
+    }
+
+
+    \newenvironment{onecolentry}{
+        \begin{adjustwidth}{
+            0.2 cm + 0.00001 cm
+        }{
+            0.2 cm + 0.00001 cm
+        }
+    }{
+        \end{adjustwidth}
+    }
+
+    \newenvironment{twocolentry}[2][]{
+        \onecolentry
+        \def\secondColumn{#2}
+        \setcolumnwidth{\fill, 4.5 cm}
+        \begin{paracol}{2}
+    }{
+        \switchcolumn \raggedleft \secondColumn
+        \end{paracol}
+        \endonecolentry
+    }
+
+    \newenvironment{header}{
+        \setlength{\topsep}{0pt}\par\kern\topsep\centering\linespread{1.5}
+    }{
+        \par\kern\topsep
+    }
+
+    \newcommand{\placelastupdatedtext}{% \placetextbox{<horizontal pos>}{<vertical pos>}{<stuff>}
+    \AddToShipoutPictureFG*{% Add <stuff> to current page foreground
+        \put(
+            \LenToUnit{\paperwidth-2 cm-0.2 cm+0.05cm},
+            \LenToUnit{\paperheight-1.0 cm}
+        ){\vtop{{\null}\makebox[0pt][c]{
+            \small\color{gray}\textit{Last updated in July 2025}\hspace{\widthof{Last updated in July 2025}}
+        }}}%
+    }%
+    }%
+
+
+    \let\hrefWithoutArrow\href
+
+
+    \renewcommand{\href}[2]{\hrefWithoutArrow{#1}{\ifthenelse{\equal{#2}{}}{ }{#2 }\raisebox{.15ex}{\footnotesize \faExternalLink*}}}
+    \newcommand{\AND}{\unskip
+            \cleaders\copy\ANDbox\hskip\wd\ANDbox
+            \ignorespaces
+        }
+
+    \begin{document}
+        
+        \newsavebox\ANDbox
+        \sbox\ANDbox{}
+
+        \placelastupdatedtext
+        
+    
+        %%% HEADER WHEN PHOTO DIDN'T NEED TO ADD. ONLY USE ONE HEADER AT A TIME%%%
+        \begin{header}
+            \textbf{\fontsize{24 pt}{24 pt}\selectfont Aarav Mehta}
+
+            \vspace{0.3 cm}
+
+            \normalsize
+            \mbox{{\color{black}\footnotesize\faCalendar[regular]}\hspace*{0.13cm}Bangalore, India}
+            \kern 0.25 cm
+            \AND
+            \kern 0.25 cm
+            \mbox{\hrefWithoutArrow{tel:+90-541-999-99-99}{\color{black}{\footnotesize\faPhone*}\hspace*{0.13cm}+91-9876543210}}
+            \kern 0.25 cm
+            \AND
+            \kern 0.25 cm
+            \mbox{\hrefWithoutArrow{mailto:youremail@yourdomain.com}{\color{black}{\footnotesize\faEnvelope[regular]}\hspace*{0.13cm}aarav.mehta@example.com}}
+            \kern 0.25 cm
+            \AND
+            \kern 0.25 cm
+            \mbox{\hrefWithoutArrow{https://linkedin.com/in/aaravmehta}{\color{black}{\footnotesize\faLinkedinIn}\hspace*{0.13cm}aaravmehta}}
+            \kern 0.25 cm
+            \AND
+            \kern 0.25 cm
+            \mbox{\hrefWithoutArrow{https://github.com/aaravmehta}{\color{black}{\footnotesize\faGithub}\hspace*{0.13cm}aaravmehta}}
+            
+            \end{header}
+            \section{Summary}
+            \vspace{0.1 cm}
+            \begin{onecolentry}
+            Results-driven Software Engineer with 3+ years of experience in the full-stack development, AI integration, and scalable web applications. Strong expertise in Python, Django, React.js, and databases (SQL/NoSQL). Passionate about solving complex problems with innovative technology solutions. Recognized for leadership in developing AI-driven applications and winning competitive hackathons. Adept at collaborating across teams to deliver high-impact projects. Actively engaged in professional development and mentoring aspiring developers.
+            \end{onecolentry}
+            \vspace{0.2 cm}
+        \section{Experience}
+            \begin{twocolentry}{
+            \textit{June 2021 – Present}
+            
+            \textit{}}
+            \textbf{Software Engineer} \newline   
+            \textit{Turing Technologies Pvt Ltd,} 
+            \textit{Bangalore, India} 
+            \end{twocolentry}
+            \vspace{0.10 cm}
+            \begin{onecolentry}
+                \begin{highlightsforbulletentries}
+                    \item \textbf{} Designed and developed scalable backend APIs using Django, improving system efficiency by 30%.
+                    \vspace{-2pt}
+                    \item \textbf{} Integrated third-party services (payment gateways, OAuth, analytics) for seamless functionality.
+                    \vspace{-2pt}
+                    \item \textbf{} Optimized MySQL queries, reducing query time by 40% through indexing and schema refinement.
+                    \vspace{-2pt}
+                    \item \textbf{} Collaborated with frontend teams to build responsive and interactive React.js-based UIs, enhancing user engagement.
+                    \vspace{-2pt}
+                    \item \textbf{} Led code reviews, mentored junior engineers, and followed Agile/Scrum methodologies for iterative improvements.
+                    \vspace{-2pt}
+                    \item \textbf{} Contributed to AI-powered modules for personalized recommendations, increasing user retention by 20%.
+                    \vspace{-2pt}
+            \end{highlightsforbulletentries}
+            \end{onecolentry}
+            \vspace{0.2 cm}
+            \begin{twocolentry}{
+            \textit{January 2021 – May 2021}
+            
+            \textit{}}
+            \textbf{Full Stack Developer (Internship)} \newline   
+            \textit{CodeCraft Inc.,} 
+            \textit{Hyderabad, India} 
+            \end{twocolentry}
+            \vspace{0.10 cm}
+            \begin{onecolentry}
+                \begin{highlightsforbulletentries}
+                    \item \textbf{} Assisted in developing modular React components, improving frontend performance.
+                    \vspace{-2pt}
+                    \item \textbf{} Implemented RESTful APIs in Flask, enabling seamless data exchange between frontend/backend.
+                    \vspace{-2pt}
+                    \item \textbf{} Participated in sprint planning, daily standups, and automated testing (Jest, Selenium).
+                    \vspace{-2pt}
+                    \item \textbf{} Contributed to deployment automation using CI/CD pipelines (Jenkins, AWS).
+                    \vspace{-2pt}
+            \end{highlightsforbulletentries}
+            \end{onecolentry}
+            \vspace{0.2 cm}
+        \section{Education}
+            \begin{twocolentry}{
+                \textit{eg:2017 – 2021}}
+                \textbf{B.Tech in Computer Science Engineering}
+
+                \textit{Indian Institute of Information Technology, Hyderabad}
+            \end{twocolentry}
+
+            \vspace{0.10 cm}
+            \vspace{0.2 cm}
+            \begin{onecolentry}
+                \begin{highlightsforbulletentries}
+                    \item \textbf{} Specialization: Artificial Intelligence & Web Technologies
+                    \vspace{-2pt}
+                    \item \textbf{} Key Projects: AI Resume Ranker, Campus Connect Portal
+                    \vspace{-2pt}
+                    \item \textbf{} Activities: Member of Robotics Club, Winner of Smart India Hackathon
+                    \vspace{-2pt}
+                \end{highlightsforbulletentries}
+            \end{onecolentry}
+            \vspace{0.2 cm}
+            \begin{twocolentry}{
+                \textit{eg:2015 – 2017}}
+                \textbf{Higher Secondary (Class 12)}
+
+                \textit{Delhi Public School, New Delhi}
+            \end{twocolentry}
+
+            \vspace{0.10 cm}
+            \vspace{0.2 cm}
+            \begin{onecolentry}
+                \begin{highlightsforbulletentries}
+                    \item \textbf{} Completed higher secondary education with a focus on science and mathematics.
+                    \vspace{-2pt}
+                    \item \textbf{} Participated in extracurricular activities and academic competitions.
+                    \vspace{-2pt}
+                \end{highlightsforbulletentries}
+            \end{onecolentry}
+            \vspace{0.2 cm}
+        \section{Skills}
+        \begin{onecolentry}
+                \textbf{Programming & Frameworks:} Python (Flask, Django), JavaScript (React.js, Node.js), SQL (MySQL, PostgreSQL), NoSQL (MongoDB)
+                \textbf{Tools & Technologies:} Docker, Kubernetes, AWS (EC2, S3, Lambda), Git, Jenkins, REST APIs, GraphQL
+                \textbf{Machine Learning & AI:} NLP (NLTK, spaCy), Data Science (Pandas, NumPy), TensorFlow (Basic)
+                \textbf{Soft Skills:} Problem-solving, Team Leadership, Agile Development, Mentorship
+        \end{onecolentry}
+        \vspace{0.1 cm}
+        \section{Certification}
+            \begin{samepage}
+                \begin{twocolentry}{
+                    2020
+                }
+                \textbf{Full Stack Web Development with React,}        
+                \textit{Coursera – Hong Kong University}
+                \end{twocolentry}
+                \vspace{0.10 cm}
+                \begin{onecolentry}
+                    \begin{highlightsforbulletentries}
+                            \item Completed a comprehensive course on full-stack web development with a focus on React.
+                            \vspace{-2pt}
+                    \end{highlightsforbulletentries}
+                \end{onecolentry}
+            \end{samepage}
+            \vspace{0.2 cm}
+            \begin{samepage}
+                \begin{twocolentry}{
+                    2019
+                }
+                \textbf{Python for Data Science,}        
+                \textit{IBM}
+                \end{twocolentry}
+                \vspace{0.10 cm}
+                \begin{onecolentry}
+                    \begin{highlightsforbulletentries}
+                            \item Gained foundational knowledge in Python for data science applications.
+                            \vspace{-2pt}
+                    \end{highlightsforbulletentries}
+                \end{onecolentry}
+            \end{samepage}
+            \vspace{0.2 cm}
+            \begin{samepage}
+                \begin{twocolentry}{
+                    2026
+                }
+                \textbf{Cert name,}        
+                \textit{org}
+                \end{twocolentry}
+                \vspace{0.10 cm}
+                \begin{onecolentry}
+                    \begin{highlightsforbulletentries}
+                            \item point one, point one, point one, point one, point one
+                            \vspace{-2pt}
+                    \end{highlightsforbulletentries}
+                \end{onecolentry}
+            \end{samepage}
+            \vspace{0.2 cm}
+        \section{Awards}
+        \begin{samepage}
+                \begin{twocolentry}{
+                    2021
+                }
+                \textbf{Best Final Year Project (AI Resume Ranker)}        
+                \textit{IIIT Hyderabad}
+                \end{twocolentry}
+                \vspace{0.10 cm}
+                \begin{onecolentry}
+                    \begin{highlightsforbulletentries}
+                            \item Recognized for excellence in developing an AI-driven resume ranking system.
+                            \vspace{-2pt}
+                    \end{highlightsforbulletentries}
+                \end{onecolentry}
+            \end{samepage}
+            \vspace{0.2 cm}
+        \begin{samepage}
+                \begin{twocolentry}{
+                    2020
+                }
+                \textbf{Hackathon Winner}        
+                \textit{Smart India Hackathon}
+                \end{twocolentry}
+                \vspace{0.10 cm}
+                \begin{onecolentry}
+                    \begin{highlightsforbulletentries}
+                            \item Won the hackathon with an innovative IoT-based disaster alert system.
+                            \vspace{-2pt}
+                    \end{highlightsforbulletentries}
+                \end{onecolentry}
+            \end{samepage}
+            \vspace{0.2 cm}
+        \section{Projects}
+            \begin{twocolentry}{    
+            \textit{Lead Developer}}
+            \textbf{Resume Ranker AI}
+            \end{twocolentry}
+            \vspace{0.10 cm}
+            \begin{onecolentry}
+            \textit{Skills Used: NLP & ML}
+                \begin{highlightsforbulletentries}
+                            \item Built an AI-driven system that scores resumes based on job descriptions using NLP & ML.
+                            \vspace{-2pt}
+                            \item Achieved 85% accuracy compared to human evaluators, improving HR workflows.
+                            \vspace{-2pt}
+                \end{highlightsforbulletentries}
+            \end{onecolentry}
+
+            \vspace{0.2 cm}
+            \begin{twocolentry}{    
+            \textit{Backend Developer}}
+            \textbf{Campus Connect Portal}
+            \end{twocolentry}
+            \vspace{0.10 cm}
+            \begin{onecolentry}
+            \textit{Skills Used: Backend Development}
+                \begin{highlightsforbulletentries}
+                            \item Developed a collaboration platform for students & faculty (adopted by 400+ users).
+                            \vspace{-2pt}
+                            \item Implemented real-time notifications and a search algorithm for project matching.
+                            \vspace{-2pt}
+                \end{highlightsforbulletentries}
+            \end{onecolentry}
+
+            \vspace{0.2 cm}
+            \begin{twocolentry}{    
+            \textit{Hackathon Winner}}
+            \textbf{Disaster Alert System}
+            \end{twocolentry}
+            \vspace{0.10 cm}
+            \begin{onecolentry}
+            \textit{Skills Used: IoT}
+                \begin{highlightsforbulletentries}
+                            \item IoT-based solution for real-time disaster alerts; won Smart India Hackathon 2020.
+                            \vspace{-2pt}
+                \end{highlightsforbulletentries}
+            \end{onecolentry}
+
+            \vspace{0.2 cm}
+        \section{Languages}
+        \begin{onecolentry}
+        
+                \textbf{English:} Fluent
+                \textbf{Hindi:} Conversational
+        \end{onecolentry}
+        \vspace{0.1 cm}
+        \section{References}
+                \begin{onecolentry}
+                    \textbf{Priya Ramesh}
+                    \vspace{0.10 cm}
+                        \hfill{ \color{black} \faEnvelope[regular]}  \hspace{0.5em}{{priya.ramesh@turingtech.in}}  \\
+                    \textit{Sr. Software Architect,}
+                    \textit{Turing Technologies} 
+                        \hfill{ \color{black} \faPhone*}  \hspace{0.5em}{{+91-9988776655}}
+                        \vspace{5pt} \\
+                \end{onecolentry}
+                \vspace{0.2 cm}
+        \section{Hobbies}
+        \begin{onecolentry}
+                \textbf{Chess:} College Team Player
+                \textbf{Photography:} Published in Blogs
+                \textbf{Coding Challenges:} LeetCode, Codeforces
+        \end{onecolentry}
+        \vspace{0.1 cm}\end{document}
